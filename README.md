@@ -12,7 +12,7 @@ git push -u origin master
 ```
 
 ```
-git push -u origin testin
+git push -u origin testing
 ```
 
 ## How to pull:
