@@ -24,4 +24,3 @@ git pull origin master
 ## Git How-To:
 
 https://www.freecodecamp.org/news/what-is-git-and-how-to-use-it-c341b049ae61/
->>>>>>> da8d09a0b7c120d2505d76522f36080e9936b500
