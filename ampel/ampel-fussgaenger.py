@@ -3,18 +3,21 @@ import time
 
 gpio.setmode(gpio.BOARD)        # definiere GPIO Overlay
 
-gpio.setup(29,gpio.OUT)         # rot
-gpio.setup(31,gpio.OUT)         # gelb
-gpio.setup(33,gpio.OUT)         # gruen
+gpio.setup(29,gpio.OUT)         # Auto rot
+gpio.setup(31,gpio.OUT)         # Auto gelb
+gpio.setup(33,gpio.OUT)         # Auto gruen
+
+gpio.setup(35,gpio.OUT)         # Fussgaenger rot
+gpio.setup(37,gpio.OUT)         # Fussgaenger grün
 
 gpio.setup(24,gpio.IN)          # Ampelschalter
-gpio.setup(22,gpio.IN)          # Abbruchschalter
+# gpio.setup(22,gpio.IN)          # Abbruchschalter
 
 
 gpio.output(33,gpio.HIGH)
 time.sleep(3)
 
-GPIO.add_event_detect(22, GPRIO.RISING)
+# GPIO.add_event_detect(22, GPRIO.RISING)
 
 try:
     while True:
@@ -32,7 +35,7 @@ try:
         gpio.output(31,gpio.LOW)
 
         gpio.output(33,gpio.HIGH)
-        GPIO.wait_for_edge(24, GPRIO.RISING)
+        GPIO.wait_for_edge(24, GPRIO.FALLING)
 
         if GPIO.event_detected(22):
             break
