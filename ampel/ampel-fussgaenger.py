@@ -14,7 +14,7 @@ gpio.setup(24,gpio.IN)          # Ampelschalter
 # gpio.setup(22,gpio.IN)          # Abbruchschalter
 
 
-gpio.output(33,gpio.HIGH)       # Auto grün
+gpio.output(33,gpio.HIGH)       # Auto gruen
 gpio.output(35,gpio.HIGH)       # FG rot
 time.sleep(3)
 
