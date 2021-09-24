@@ -8,7 +8,7 @@ gpio.setup(31,gpio.OUT)         # Auto gelb
 gpio.setup(33,gpio.OUT)         # Auto gruen
 
 gpio.setup(35,gpio.OUT)         # Fussgaenger rot
-gpio.setup(37,gpio.OUT)         # Fussgaenger grün
+gpio.setup(37,gpio.OUT)         # Fussgaenger gruen
 
 gpio.setup(24,gpio.IN)          # Ampelschalter
 # gpio.setup(22,gpio.IN)          # Abbruchschalter
