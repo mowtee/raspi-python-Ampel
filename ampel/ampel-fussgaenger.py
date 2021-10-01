@@ -30,7 +30,7 @@ gpio.output(35,gpio.HIGH)       # FG rot
 time.sleep(3)
 
 
-# GPIO.add_event_detect(22, GPRIO.RISING)
+# GPIO.add_event_detect(22, GPRIO.RISING) # Programm beendet bei langem Druecken des Knopfs -> nicht mehr benötigt
 
 # Ampel auf Dauerschleife:
 
@@ -77,7 +77,7 @@ try:    # try/except Statement, um KeyboardInterrupt (Ctrl-C) abzufangen und vor
         gpio.wait_for_edge(24, gpio.FALLING)
 
 
-#        if GPIO.event_detected(22):
+#        if GPIO.event_detected(22):     # Ex-Abbruchschalter
 #            break
 
 
