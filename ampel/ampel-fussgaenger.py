@@ -1,12 +1,10 @@
-"""
-Python Script, um mittels Raspberry Pi eine Ampel darzustellen.
-Simuliert wird ein Fussgaengerueberweg mit einer Ampel fuer Autofahrer und einer fuer Fussgaenger.
-Dazu kommt der Knopf, den Fussgaenger benutzen, um gruen zu bekommen. Bei druecken des Knopfs schaltet die Autoampel
-erst auf rot, danach bekommen die Fussgaenger gruen. Langes halten des Knopfs beendet das Programm.
+# Python Script, um mittels Raspberry Pi eine Ampel darzustellen.
+# Simuliert wird ein Fussgaengerueberweg mit einer Ampel fuer Autofahrer und einer fuer Fussgaenger.
+# Dazu kommt der Knopf, den Fussgaenger benutzen, um gruen zu bekommen. Bei druecken des Knopfs schaltet die Autoampel
+# erst auf rot, danach bekommen die Fussgaenger gruen. Langes halten des Knopfs beendet das Programm.
 
-Repository: https://github.com/mowtee/raspi-python-embedded
-Code, Anmerkungen, Schaltplan
-"""
+# Repository: https://github.com/mowtee/raspi-python-embedded
+# Code, Anmerkungen, Schaltplan
 
 import RPi.GPIO as gpio         # importiere Bibliotheken
 import time
@@ -47,7 +45,7 @@ try:    # try/except Statement, um KeyboardInterrupt (Ctrl-C) abzufangen und vor
                 if gpio.input(24) == gpio.LOW:
                     time.sleep(0.5)
                 else:
-                    break
+                   break
             if t == 6:
                 gpio.cleanup()
                 exit()
@@ -75,7 +73,7 @@ try:    # try/except Statement, um KeyboardInterrupt (Ctrl-C) abzufangen und vor
         gpio.output(31,gpio.LOW)
         gpio.output(33,gpio.HIGH)
 
-        
+
         gpio.wait_for_edge(24, gpio.FALLING)
 
 
