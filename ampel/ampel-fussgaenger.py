@@ -46,9 +46,9 @@ try:    # try/except Statement, um KeyboardInterrupt (Ctrl-C) abzufangen und vor
                     time.sleep(0.5)
                 else:
                    break
-            if t == 6:
-                gpio.cleanup()
-                exit()
+                if t == 5:
+                    gpio.cleanup()
+                    exit()
 
 # Autoampel auf rot schalten, Fussgaengerampel auf gruen schalten:
 
