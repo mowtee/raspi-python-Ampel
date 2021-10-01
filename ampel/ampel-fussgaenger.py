@@ -73,8 +73,9 @@ try:    # try/except Statement, um KeyboardInterrupt (Ctrl-C) abzufangen und vor
         time.sleep(1)
         gpio.output(29,gpio.LOW)
         gpio.output(31,gpio.LOW)
-
         gpio.output(33,gpio.HIGH)
+
+        
         gpio.wait_for_edge(24, gpio.FALLING)
 
 
