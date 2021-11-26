@@ -154,8 +154,8 @@ if __name__ == "__main__":
     try:
         while true:
             data = sigridADXL345.getData('g')
-            print("x-Value:", data[0], "g")
-            print("y-Value:", data[1], "g")
-            print("z-Value:", data[2], "g")
+            print("X-Value:", data[0], "g")
+            print("Y-Value:", data[1], "g")
+            print("Z-Value:", data[2], "g")
     except KeyboardInterrupt:
         exit()
