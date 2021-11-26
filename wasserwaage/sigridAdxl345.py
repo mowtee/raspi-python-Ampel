@@ -5,6 +5,7 @@
 
 import smbus
 import RPI.GPIO as GPIO
+from time import sleep
 
 # Korrekten I2C Bus für Raspberry Pi Version auswaehlen und SMBus initialisieren:
 revision = GPIO.RPI_REVISION
@@ -157,5 +158,6 @@ if __name__ == "__main__":
             print("X-Value:", data[0], "g")
             print("Y-Value:", data[1], "g")
             print("Z-Value:", data[2], "g")
+            sleep(1)
     except KeyboardInterrupt:
         exit()
