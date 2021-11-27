@@ -78,9 +78,9 @@ class SigridADXL345:
         }
 
         defaultRate = BW_RATE_100HZ
-        if rate not in adxl345Rates:
+        if self.rate not in adxl345Rates:
             print ("Invalid Value for BW Rate! Set to default 100 Hz.")
-        rateBits    = adxl345_rates.get(rate, defaultRate)
+        rateBits    = adxl345_rates.get(self.rate, defaultRate)
 
         bus.write_byte_data(self.address, BW_RATE, rateBits)
 
@@ -96,11 +96,11 @@ class SigridADXL345:
         }
 
         defaultRange        = RANGE_2G
-        if range not in adxl345Ranges:
+        if self.range not in adxl345Ranges:
             print("Invalid Value for g-Range! Set to default 2g.")
-        rangeBits           = adxl345Ranges.get(range, defaultRange)
+        rangeBits           = adxl345Ranges.get(self.range, defaultRange)
 
-        # FULL_RES bit für 10 bit Modus und konstanter Aufloesung grundsaetzlich setzen, dafür range mit FULL_RES Bit Oder-verknuepfen:
+        # FULL_RES bit fuer konstante Aufloesung grundsaetzlich setzen, dafür range mit FULL_RES Bit Oder-verknuepfen:
         rangeBitsFullRes    = rangeBits | FULL_RES
 
         bus.write_byte_data(self.address, DATA_FORMAT, rangeBitsFullRes)
