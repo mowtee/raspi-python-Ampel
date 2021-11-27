@@ -146,9 +146,11 @@ if __name__ == "__main__":
 
     # Falls direkt aufgerufen, eine Instanz der Klasse erschaffen und Werte in Schleife ausgeben:
 
-    print("ADXL345 Testprogram\n===================")
+    print("ADXL345 Testprogram\n===================\n")
+    print()
     rate = input("Data Rate: ")
     range = input("G Range: ")
+    print()
 
     sigridADXL345 = SigridADXL345(rate, range)
 
@@ -157,7 +159,7 @@ if __name__ == "__main__":
             data = sigridADXL345.getData('g')
             print("X-Value:", data[0], "g")
             print("Y-Value:", data[1], "g")
-            print("Z-Value:", data[2], "g")
+            print("Z-Value:", data[2], "g \n")
             sleep(1)
     except KeyboardInterrupt:
         exit()
