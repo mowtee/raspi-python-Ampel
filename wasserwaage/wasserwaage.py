@@ -77,7 +77,7 @@ try:
             gpio.output(31,gpio.HIGH)
 
         if abs(rotX) < threshold or abs(rotY) < threshold:
-             gpio.output(29,gpio.HIGH)
+            gpio.output(29,gpio.HIGH)
 
         time.sleep(0.1)                         # Wiederholrate 10 Hz
 
