@@ -49,7 +49,7 @@ class SigridADXL345:
     address     = none
     rate        = none
     range       = none
-    units       = none
+    unit       = none
 
     def __init__(self, address = ADDRESS, rate, range):
         try:
