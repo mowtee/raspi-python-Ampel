@@ -102,7 +102,7 @@ class SigridADXL345:
         # FULL_RES bit für 10 bit Modus und konstanter Aufloesung grundsaetzlich setzen, dafür range mit FULL_RES Bit Oder-verknuepfen:
         rangeBitsFullRes    = rangeBits | FULL_RES
 
-        bus.write_byte_data(self.address, DATA_FORMAT, rangeBits)
+        bus.write_byte_data(self.address, DATA_FORMAT, rangeBitsFullRes)
 
 
     def startMeasurement(self):
@@ -131,8 +131,9 @@ class SigridADXL345:
 
         adxl345Units = ['g', 'm2s']
         # Falls Werte in m/s^2 gewuenscht:
-        if unit not in adxl345Units:
+        if self.unit not in adxl345Units:
             print("Invalid Unit! Choose g or m2s. Defaulting to g.")
+            self.unit = 'g'
         if unit == m2s:
             x *= G_TO_MS2_FACTOR
             y *= G_TO_MS2_FACTOR
@@ -148,18 +149,19 @@ if __name__ == "__main__":
 
     print("ADXL345 Testprogram\n===================\n")
     print()
-    rate = input("Data Rate: ")
-    range = input("G Range: ")
+    rate    = input("Data Rate: ")
+    range   = input("G Range: ")
+    unit    = input("Unit: ")
     print()
 
     sigridADXL345 = SigridADXL345(rate, range)
 
     try:
         while true:
-            data = sigridADXL345.getData('g')
-            print("X-Value:", data[0], "g")
-            print("Y-Value:", data[1], "g")
-            print("Z-Value:", data[2], "g \n")
+            data = sigridADXL345.getData(unit)
+            print("X-Value:", data[0], sigridADXL345.unit)
+            print("Y-Value:", data[1], sigridADXL345.unit)
+            print("Z-Value:", data[2], sigridADXL345.unit,"\n")
             sleep(1)
     except KeyboardInterrupt:
         exit()
