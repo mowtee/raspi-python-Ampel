@@ -51,7 +51,7 @@ class SigridADXL345:
     range       = none
     unit       = none
 
-    def __init__(self, address = ADDRESS, rate, range):
+    def __init__(self, rate, range, address = ADDRESS):
         try:
             print("Initializing...")
             self.address = address
