@@ -150,8 +150,8 @@ if __name__ == "__main__":
 
     print("ADXL345 Testprogram\n===================\n")
     print()
-    rate    = input("Data Rate: ")
-    range   = input("G Range: ")
+    rate    = int(input("Data Rate: "))
+    range   = int(input("G Range: "))
     unit    = input("Unit: ")
     print()
 
