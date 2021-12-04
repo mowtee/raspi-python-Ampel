@@ -4,7 +4,7 @@
 # Siehe Dokumentation
 
 import smbus
-import RPI.GPIO as GPIO
+import RPi.GPIO as GPIO
 from time import sleep
 
 # Korrekten I2C Bus für Raspberry Pi Version auswaehlen und SMBus initialisieren:
