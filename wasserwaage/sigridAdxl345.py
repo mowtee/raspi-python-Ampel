@@ -46,10 +46,10 @@ G_TO_MS2_FACTOR = 9.80665       # Umrechnungsfaktor: 1 g = 9.80665 m/s^2
 
 class SigridADXL345:
 
-    address     = none
-    rate        = none
-    range       = none
-    unit       = none
+    address     = None
+    rate        = None
+    range       = None
+    unit        = None
 
     def __init__(self, rate, range, address = ADDRESS):
         try:
