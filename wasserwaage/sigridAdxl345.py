@@ -117,13 +117,13 @@ class SigridADXL345:
         dataBytes = bus.read_i2c_block_data(self.address, AXES_DATA, 6)     # liefert ein 6 Werte langes Array mit den Bits aus DATAX0 bis DATAZ1 zurueck
 
         x = dataBytes[0] | (dataBytes[1] << 8)      # verschiebt MSB um 8 bit nach links und Oder-verknuepft mit dem LSB
-        x -= (1<<(9+self.rangeBits)                 # zieht die Haelfte des maximalen Wertes ab -> singned Int zu Wert (Laenge des Datawords abhaengig von Range)
+        x -= (1<<(9+self.rangeBits))                # zieht die Haelfte des maximalen Wertes ab -> singned Int zu Wert (Laenge des Datawords abhaengig von Range)
 
         y = dataBytes[2] | (dataBytes[3] << 8)
-        y -= (1<<(9+self.rangeBits)
+        y -= (1<<(9+self.rangeBits))
 
         z = dataBytes[4] | (dataBytes[5] << 8)
-        z -= (1<<(9+self.rangeBits)
+        z -= (1<<(9+self.rangeBits))
 
         # Rohwerte in g's umsetzen:
         x *= SCALE_FACTOR
