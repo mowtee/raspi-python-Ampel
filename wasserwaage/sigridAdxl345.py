@@ -80,7 +80,7 @@ class SigridADXL345:
         defaultRate = BW_RATE_100HZ
         if self.rate not in adxl345Rates:
             print ("Invalid Value for BW Rate! Set to default 100 Hz.")
-        rateBits    = adxl345_rates.get(self.rate, defaultRate)
+        rateBits    = adxl345Rates.get(self.rate, defaultRate)
 
         bus.write_byte_data(self.address, BW_RATE, rateBits)
 
