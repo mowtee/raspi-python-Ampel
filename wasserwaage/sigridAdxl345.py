@@ -102,7 +102,7 @@ class SigridADXL345:
         defaultRange        = RANGE_2G
         if self.range not in adxl345Ranges:
             print("Invalid Value for g-Range! Set to default 2g.")
-        rangeBits           = adxl345Ranges.get(self.range, defaultRange)
+        self.rangeBits           = adxl345Ranges.get(self.range, defaultRange)
 
         # FULL_RES bit fuer konstante Aufloesung grundsaetzlich setzen, dafür range mit FULL_RES Bit Oder-verknuepfen:
         rangeBitsFullRes    = rangeBits | FULL_RES
