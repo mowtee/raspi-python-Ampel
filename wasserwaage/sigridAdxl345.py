@@ -67,6 +67,10 @@ class SigridADXL345:
     def setRate(self, rate):
         # Python dictionary mit moeglichen Werten für die Bandwidth und Output Data Rate
         # zum Mapping der Uebergabevariable verwenden:
+
+        print(rate)
+        print(type(rate))
+
         adxl345Rates = {
         1600:   BW_RATE_1600HZ,
         800:    BW_RATE_800HZ,
@@ -158,7 +162,7 @@ if __name__ == "__main__":
     sigridADXL345 = SigridADXL345(rate, range)
 
     try:
-        while true:
+        while True:
             data = sigridADXL345.getData(unit)
             print("X-Value:", data[0], sigridADXL345.unit)
             print("Y-Value:", data[1], sigridADXL345.unit)
