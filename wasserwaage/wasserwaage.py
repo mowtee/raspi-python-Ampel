@@ -9,6 +9,8 @@ import RPi.GPIO as gpio
 import math as m
 from time import sleep
 
+gpio.setmode(gpio.BOARD)
+
 gpio.setup(29,gpio.OUT)         # LED Center
 gpio.setup(31,gpio.OUT)         # LED X+
 gpio.setup(33,gpio.OUT)         # LED X-
