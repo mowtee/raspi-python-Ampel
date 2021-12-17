@@ -141,7 +141,7 @@ class SigridADXL345:
         if self.unit not in adxl345Units:
             print("Invalid Unit! Choose g or m2s. Defaulting to g.")
             self.unit = 'g'
-        if unit == m2s:
+        if self.unit == 'm2s':
             x *= G_TO_MS2_FACTOR
             y *= G_TO_MS2_FACTOR
             z *= G_TO_MS2_FACTOR
