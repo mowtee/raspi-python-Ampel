@@ -54,9 +54,11 @@ class SigridADXL345:
     def __init__(self, rate, range, address = ADDRESS):
         try:
             print("Initializing...")
-            self.address = ADDRESS
+            self.address = address
             self.setRate(rate)
+            print("rate set")
             self.setRange(range)
+            print("range set")
             self.startMeasurement()
             print("Done!")
         except:
