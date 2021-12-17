@@ -21,7 +21,7 @@ gpio.setup(24,gpio.IN)          # Umschalter Horizontal- / Vertikalmodus
 
 rate        = 100
 range       = 2
-unit        = g
+unit        = 'g'
 
 horizontal  = True              # Boolean: Horizontal-Modus (True) / Vertikalmodus (False)
 
