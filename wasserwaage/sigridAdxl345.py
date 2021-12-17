@@ -66,7 +66,7 @@ class SigridADXL345:
             exit()
 
 
-    def setRate(self, self.rate):
+    def setRate(self, rate):
         # Python dictionary mit moeglichen Werten für die Bandwidth und Output Data Rate
         # zum Mapping der Uebergabevariable verwenden:
 
@@ -91,7 +91,7 @@ class SigridADXL345:
         bus.write_byte_data(self.address, BW_RATE, rateBits)
 
 
-    def setRange(self, self.range):
+    def setRange(self, range):
         # Python dictionary mit moeglichen Werten für die g Range
         # zum Mapping der Uebergabevariable verwenden:
         adxl345Ranges = {
