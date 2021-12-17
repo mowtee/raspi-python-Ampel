@@ -66,7 +66,7 @@ class SigridADXL345:
             exit()
 
 
-    def setRate(self, rate):
+    def setRate(self, self.rate):
         # Python dictionary mit moeglichen Werten für die Bandwidth und Output Data Rate
         # zum Mapping der Uebergabevariable verwenden:
 
@@ -91,7 +91,7 @@ class SigridADXL345:
         bus.write_byte_data(self.address, BW_RATE, rateBits)
 
 
-    def setRange(self, range):
+    def setRange(self, self.range):
         # Python dictionary mit moeglichen Werten für die g Range
         # zum Mapping der Uebergabevariable verwenden:
         adxl345Ranges = {
@@ -107,7 +107,7 @@ class SigridADXL345:
         self.rangeBits           = adxl345Ranges.get(self.range, defaultRange)
 
         # FULL_RES bit fuer konstante Aufloesung grundsaetzlich setzen, dafür range mit FULL_RES Bit Oder-verknuepfen:
-        rangeBitsFullRes    = rangeBits | FULL_RES
+        rangeBitsFullRes    = self.rangeBits | FULL_RES
 
         bus.write_byte_data(self.address, DATA_FORMAT, rangeBitsFullRes)
 
