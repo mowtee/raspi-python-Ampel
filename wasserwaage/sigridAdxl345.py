@@ -124,6 +124,7 @@ class SigridADXL345:
 
         x = dataBytes[0] | ((dataBytes[1] << 8))      # verschiebt MSB um 8 bit nach links und Oder-verknuepft mit dem LSB
         x -= (1<<(9+self.rangeBits))                # zieht die Haelfte des maximalen Wertes ab -> singned Int zu Wert (Laenge des Datawords abhaengig von Range)
+        print(x)
 
         y = dataBytes[2] | ((dataBytes[3] << 8))
         y -= (1<<(9+self.rangeBits))
