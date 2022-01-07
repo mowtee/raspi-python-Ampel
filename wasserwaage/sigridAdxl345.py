@@ -3,6 +3,7 @@
 # Dies ist eine Raspberry Pi Python Library fuer den Accelerometer ADXL345
 # Siehe Dokumentation
 
+from typing import ValuesView
 import smbus
 import RPi.GPIO as GPIO
 from time import sleep
@@ -44,6 +45,16 @@ SCALE_FACTOR    = 0.0039        # Bei gesetztem FULL_RES bit in DATA_FORMAT stei
 G_TO_MS2_FACTOR = 9.80665       # Umrechnungsfaktor: 1 g = 9.80665 m/s^2
 
 
+def fromtwos(value, wordsize):
+    if(value & (1 << wordsize - 1)):
+        value = value - (1<<wordsize)
+    return value
+
+def totwos(value, wordsize):
+    if(value<0):
+        value = bin((1<<wordsize)+value)
+    return value
+
 class SigridADXL345:
 
     address     = None
@@ -51,14 +62,17 @@ class SigridADXL345:
     range       = None
     unit        = None
 
-    def __init__(self, rate, range, address = ADDRESS):
+    def __init__(self, rate, measure_range, unit, address = ADDRESS):
         try:
             print("Initializing...")
             self.address = address
+            self.rate = rate
             self.setRate(rate)
             print("rate set")
-            self.setRange(range)
+            self.measure_range = measure_range
+            self.setRange(measure_range)
             print("range set")
+            self.unit = unit
             self.startMeasurement()
             print("Done!")
         except:
@@ -66,12 +80,9 @@ class SigridADXL345:
             exit()
 
 
-    def setRate(self, rate):
+    def setRate(self):
         # Python dictionary mit moeglichen Werten für die Bandwidth und Output Data Rate
         # zum Mapping der Uebergabevariable verwenden:
-
-        print(rate)
-        print(type(rate))
 
         adxl345Rates = {
         1600:   BW_RATE_1600HZ,
@@ -91,7 +102,7 @@ class SigridADXL345:
         bus.write_byte_data(self.address, BW_RATE, rateBits)
 
 
-    def setRange(self, range):
+    def setRange(self):
         # Python dictionary mit moeglichen Werten für die g Range
         # zum Mapping der Uebergabevariable verwenden:
         adxl345Ranges = {
@@ -102,7 +113,7 @@ class SigridADXL345:
         }
 
         defaultRange        = RANGE_2G
-        if self.range not in adxl345Ranges:
+        if self.measure_range not in adxl345Ranges:
             print("Invalid Value for g-Range! Set to default 2g.")
         self.rangeBits           = adxl345Ranges.get(self.range, defaultRange)
 
@@ -112,25 +123,26 @@ class SigridADXL345:
         bus.write_byte_data(self.address, DATA_FORMAT, rangeBitsFullRes)
 
 
+
+
     def startMeasurement(self):
 
         bus.write_byte_data(self.address, POWER_CTL, MEASURE)
 
 
-    def getData(self, unit):
+    def getData(self):
         # Ab DATAX0 6 Bytes in einer Operation auslesen:
         # (Wichtig, damit Datensatz komplett aus einer Messung stammt)
         dataBytes = bus.read_i2c_block_data(self.address, AXES_DATA, 6)     # liefert ein 6 Werte langes Array mit den Bits aus DATAX0 bis DATAZ1 zurueck
 
-        x = dataBytes[0] | ((dataBytes[1] << 8))      # verschiebt MSB um 8 bit nach links und Oder-verknuepft mit dem LSB
-        x -= (1<<(9+self.rangeBits))                # zieht die Haelfte des maximalen Wertes ab -> singned Int zu Wert (Laenge des Datawords abhaengig von Range)
-
+        x = dataBytes[0] | ((dataBytes[1] << 8))        # verschiebt MSB um 8 bit nach links und Oder-verknuepft mit dem LSB
+        x = fromtwos(x, 16)                             # wandelt aus Zweierkomplement um
 
         y = dataBytes[2] | ((dataBytes[3] << 8))
-        y -= (1<<(9+self.rangeBits))
+        y = fromtwos(y, 16)
 
         z = dataBytes[4] | ((dataBytes[5] << 8))
-        z -= (1<<(9+self.rangeBits))
+        z = fromtwos(z, 16)
 
         # Rohwerte in g's umsetzen:
         x *= SCALE_FACTOR
@@ -149,6 +161,11 @@ class SigridADXL345:
 
         return [x, y, z]
 
+    def print(self):
+        data = self.getData(self)
+        print("X-Value:", data[0], sigridADXL345.unit)
+        print("Y-Value:", data[1], sigridADXL345.unit)
+        print("Z-Value:", data[2], sigridADXL345.unit,"\n")
 
 
 if __name__ == "__main__":
@@ -158,18 +175,15 @@ if __name__ == "__main__":
     print("ADXL345 Testprogram\n===================\n")
     print()
     rate    = int(input("Data Rate: "))
-    range   = int(input("G Range: "))
+    measure_range   = int(input("G Range: "))
     unit    = input("Unit: ")
     print()
 
-    sigridADXL345 = SigridADXL345(rate, range)
+    sigridADXL345 = SigridADXL345(rate, measure_range, unit)
 
     try:
         while True:
-            data = sigridADXL345.getData(unit)
-            print("X-Value:", data[0], sigridADXL345.unit)
-            print("Y-Value:", data[1], sigridADXL345.unit)
-            print("Z-Value:", data[2], sigridADXL345.unit,"\n")
+            print(sigridADXL345)
             sleep(1)
     except KeyboardInterrupt:
         exit()
