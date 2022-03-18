@@ -1,5 +1,5 @@
 # Projekt Geschwindigkeitsmessung
-
+Timo Ostlender, Franz Rößler, Timo Sirinyan
 ## Anfangsüberlegungen
 
 Es soll die Geschwindigkeit eines aufziehbaren Modellautos bestimmt werden.
@@ -13,6 +13,8 @@ Geschwindigkeit ist also zurückgelegte Wegstrecke durch vergangene Zeit.
 Zur Messnung hält man dabei entweder Δl konstant, indem man an zwei (oder mehr) bekannten Punkten mit bekannter Entfernung jeweils eine Messung durchführt und die Geschwindigkeit über den Zeitunterschied zwischen diesen Messungen durchführt, wie z.B. bei Verwendung zweier Lichtschranken oder Induktionsschleifen.
 
 Oder Δt wird konstant gehalten, wie z.B. bei der Messung mit einer Radarpistole. Hier wird an zwei (oder mehr) bekannten Zeitpunkten eine Messung durchgeführt, die jeweils die Entfernung zum Messgerät zurück liefert. Hieraus wird dann der Ortsunterschied berechnet und dann die Geschwindigkeit bestimmt.
+
+## Umsetzung
 
 In unserem Rahmen halten wir die Messung per Lichtschranke für praktikabel.
 Dafür müssen wir zwei Lichtschranken in bekannter Entfernung zueinander aufbauen. Wir benötigen ein Programm, dass die Zeit zwischen Unterbrechung der ersten und der zweiten Lichtschranke misst und daraus im Anschluss die Geschwindigkeit berechnet und ausgibt.
@@ -34,4 +36,7 @@ Die Messung ist beendet, sobald die zweite Lichtschranke unterbrochen wird. Dies
 Das Programm fährt dann mit der Berechnung der Geschwindigkeit fort, löscht zeit1 und zeit2, leert die LCD Anzeige und entscheidet, ob die gemessene Geschwindigkeit größer als die erlaubte ist, oder nicht. Danach wird die Geschwindigkeit zusammen mit einer entsprechenden Anzeige (Danke! :) oder Zu schnell! :( ) auf dem LCD ausgegeben.
 
 Alles was wir nun noch brauchen, ist die Leerung der LCD-Anzeige, wenn eine gewisse Zeit lang keine Messung durchgeführt wurde.
-Dies haben wir 
+Naheliegend wäre eine Konstruktion mit time.sleep(), doch das wäre tatsächlich nicht zielführend, da wir ja wollen, dass, wenn das nächste Auto unmittelbar in die Messstrecke einfährt, die Messung durchgeführt wird. Wir wollen also, dass unsere Programmschleife weiter unverändert durchläuft. Die Lösung ist die Speicherung des letzten Messzeitpunkts. Im Bereich um 1 wird nun zunächst einmal geprüft, ob dieser Zeitpunkt überhaupt gesetzt ist. Dies ist nach Programmstart nicht der Fall, wohl aber ab der ersten Messung. Im Anschluss wird geprüft, ob die aktuelle Systemzeit (oder eigentlich die Sekunden seit der UNIX-Epoche) größer als der Zeitpunkt der letzten Messung plus die gewählte maximale Anzeigedauer ist. Falls ja, wird die Anzeige geleert.
+
+Zum LCD selber: hier haben wir uns dem Code bedient, den man in der [Produktdokumentation](https://docs.sunfounder.com/projects/superkit-v2-pi/en/latest/Lesson_13_lcd1602.html) findet.
+Diesen haben wir als separates Python File bzw. Modul gespeichert und im Skript eingebunden. Durch `from lcd import LCD` wird die Klasse LCD im globalen Namespace für den Interpreter verfügbar gemacht.
