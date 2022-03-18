@@ -32,3 +32,7 @@ Numberings on GPIO Pinout Diagrams are to be read with Rpi rotated that header i
 ## RPi.GPIO Dokumentation:
 
 https://sourceforge.net/p/raspberry-gpio-python/wiki/browse_pages/
+
+## LCD 1602 Dokumentation:
+
+https://docs.sunfounder.com/projects/superkit-v2-pi/en/latest/Lesson_13_lcd1602.html
